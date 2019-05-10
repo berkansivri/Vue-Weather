@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <h1>{{hello}}</h1>
-    <Forecast></Forecast>
+  <div id="app" v-if="latitude && longitude">
+    <Map :latitude="latitude" :longitude="longitude"></Map>
+    <Forecast :latitude="latitude" :longitude="longitude"></Forecast>
   </div>
 </template>
 
@@ -13,6 +13,18 @@ export default {
   name: 'app',
   components: {
     Forecast,
+    Map
+  },
+  data(){
+    return {
+      latitude: null,
+      longitude: null
+    }
+  },
+  watch:{
+    hello(val){
+      console.log(val);
+    }
   },
   apollo:{
     hello: gql`
@@ -20,7 +32,20 @@ export default {
         hello
       }
     `
-  }
+  },
+  beforeCreate() { 
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => { 
+          this.latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  },
 }
 </script>
 
@@ -32,6 +57,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background-color: #fcfcfc;
+  background-color: #fcfcfc; 
 }
 </style>

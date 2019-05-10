@@ -1,40 +1,40 @@
 <template>
-  <div class="dark-sky-widget default-embed" data-name="default">
+  <div class="dark-sky-widget default-embed" data-name="default" v-if="Object.keys(this.currently).length > 0">
     <div id="currentDetailsWrapper">
       <div id="currentDetails">
         <div class="wind">
           <span class="label swip">Wind:</span>
           <span class="val swap">
             <span class="num swip">{{currently.windSpeed}} </span>
-            <span class="unit swap">m/s</span> 
+            <span class="unit swap">m/s</span>
             <span class="direction" title="NNE" style="display:inline-block;-ms-transform:rotate(16deg);-webkit-transform:rotate(16deg);transform:rotate(16deg);">↑</span>
           </span>
-        </div> 
+        </div>
         <div class="humidity">
           <span class="label swip">Humidity:</span>
           <span class="val swap">
             <span class="num swip">{{currently.humidity}} </span><span class="unit swap">%</span>
           </span>
-        </div> 
+        </div>
         <div class="dew_point">
           <span class="label swip">Dew Pt:</span>
           <span class="val swap">
             <span class="num">{{currently.dewPoint}}</span><span class="unit">˚</span>
           </span>
-        </div> 
-         <div class="uv_index">
+        </div>
+        <div class="uv_index">
           <span class="label swip">UV Index:</span>
           <span class="val swap">
             <span class="num">{{currently.uvIndex}}</span>
           </span>
-        </div> 
-        <div class="visibility"> 
+        </div>
+        <div class="visibility">
           <span class="label swip">Visibility:</span>
           <span class="val swap">
             <span class="num swip">{{currently.visibility}} </span>
             <span class="unit swap">km</span>
           </span>
-        </div> 
+        </div>
         <div class="pressure">
           <span class="label swip">Pressure:</span>
           <span class="val swap">
@@ -88,30 +88,25 @@ import gql from "graphql-tag";
 import moment from "moment";
 
 export default {
+  props: {
+    latitude:{
+      default: "41.0053"
+    },
+    longitude:{
+      default: "28.977"
+    }
+  },
   data() {
     return {
-      latitude: 0,
-      longitude: 0,
       currently: {},
       daily: {}
     };
   },
-  created() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-          this.getForecast();
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    }
+  mounted() {
+    this.getForecast();
   },
   methods: {
-    async getForecast() {
+    async getForecast() { 
       var response = await this.$apollo.query({
         query: gql`
           query($latitude: Float!, $longitude: Float!) {
@@ -147,7 +142,7 @@ export default {
           longitude: this.longitude
         }
       });
-      console.log(response);
+
       this.currently = response.data.forecast.currently;
       this.currently.temperature = Math.trunc(this.currently.temperature);
 
@@ -168,37 +163,4 @@ export default {
 @import "../style/widget-default.css";
 @import "../style/widget-embed.css";
 @import "../style/responsive-widget.css";
-
-#currentDetailsWrapper {
-    width: 100%;
-    line-height: 40px;
-    padding: 0 20px;
-    background-color: rgba(238,238,238,.35);
-    overflow: hidden;
-}
-#currentDetails {
-  position: relative;
-  text-align: center;
-  left: -10px;
-  white-space: nowrap;
-  font-size: 14px;
-  margin: 0 auto;
-  max-width: 750px;
-}
-#currentDetails .label {
-  display: inline-block;
-  text-align: right;
-  font-weight: 500;
-  margin: 0 4px;
-}
-#currentDetails > div {
-  display: inline-block;
-  text-align: center;
-  margin: 0 10px;
-}
-#currentDetails .val {
-  display: inline-block;
-  text-align: left;
-  font-weight: 300;
-}
 </style>

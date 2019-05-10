@@ -76,7 +76,11 @@ header p a {
 
 .dark-sky-widget {
   margin: 0 auto;
-  /*margin: 150px 0;*/
+  opacity: 1;
+  position:relative;
+  background-color: #fcfcfc;
+  border: 2px solid #333;
+  border-radius: 10px; 
 }
 
 hr {
@@ -301,4 +305,39 @@ footer p code {
   height: 18px;
   top: 3px;
   left: 2px;
+}
+
+
+
+#currentDetailsWrapper {
+  width: 100%;
+  line-height: 40px;
+  padding: 0 20px;
+  background-color: rgba(207, 204, 204, 0.35);
+  overflow: hidden;
+}
+#currentDetails {
+  position: relative;
+  text-align: center;
+  left: -10px;
+  white-space: nowrap;
+  font-size: 14px;
+  margin: 0 auto;
+  max-width: 750px;
+}
+#currentDetails .label {
+  display: inline-block;
+  text-align: right;
+  font-weight: 500;
+  margin: 0 4px;
+}
+#currentDetails > div {
+  display: inline-block;
+  text-align: center;
+  margin: 0 10px;
+}
+#currentDetails .val {
+  display: inline-block;
+  text-align: left;
+  font-weight: 300;
 }
