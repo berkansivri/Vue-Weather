@@ -3,7 +3,7 @@
     <img src="https://vue-apollo.netlify.com/logo.png" alt="Logo" width="auto" height="auto">
   </a>
 
-  <h3 align="center">Vue2 Weather</h3>
+  <h3 align="center">Vue Weather</h3>
 
   <p align="center">
     This project is vue implementation on <a href="https://darksky.net" target="_blank">DarkSky</a> maps and default weather embed with getting data from Apollo-GraphQL server with <a href="https://github.com/Akryum/vue-apollo" target="_blank">Vue-Apollo</a>.
