@@ -1,0 +1,326 @@
+/* Media query for mobile devices */
+
+@media screen and (max-width: 740px) {
+
+  .main-container {
+    padding: 5%;
+    width: auto;
+  }
+
+  #container {
+    flex-direction: column;
+    /*text-align: center;*/
+  }
+
+  .widget-description-container {
+    flex-direction: column;
+  }
+
+  .widget-iframe-container {
+    width: auto;
+    min-width: 100%;
+  }
+
+
+  .widget-container-description {
+    width: auto;
+    position: static;
+    margin: 0 3%;
+  }
+
+  .widget-description-body {
+    margin: 0 auto;
+  }
+
+  .widget-description-title, .button-generate {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 600px) {
+
+  .main-container h1 {
+    font-size: 1.7em;
+  }
+
+  .main-container h3 {
+    font-size: 1.2em;
+  }
+
+  header p:first-child {
+    padding-left: 0;
+    max-width: 75px;
+    margin-right: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 12px;
+  }
+
+  header p:last-child {
+    padding-right: 0;
+  }
+
+  .default-embed #current, .default-embed .current {
+    justify-content: space-around;
+  }
+
+  #current-temp {
+    margin: 0;
+    font-size: 2.5em;
+  }
+
+  #current-temp span {
+    font-size: .3em;
+  }
+
+  #daily {
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .day {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0 8%;
+
+  }
+
+  .day .high-temp, .day .low-temp {
+    min-width: 30px;
+  }
+
+  .day-name {
+    width: 20px;
+  }
+
+  .daily-hide {
+    display: none;
+  } 
+
+  .description {
+    width: 80%;
+  }
+
+  /* Customization Controls */
+  #gmaps {
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  #gmaps p:nth-child(4) {
+    padding: 0;
+  }
+
+  #gmaps p:nth-child(4) span {
+    margin: 0 auto;
+  }
+
+  #custom-map {
+    flex-direction: column;
+  }
+
+  #map-canvas {
+    margin: 0 auto;
+    width: 70%;
+  }
+
+  .show-hide-map p {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #current canvas, .current canvas {
+    width: 60px;
+    height: 60px;
+  }
+
+  #current-summary p:first-child {
+    margin-bottom: 0;
+  }
+
+  #current-summary p:nth-child(2) {
+    margin-top: 0;
+  }
+
+  #custom-controls {
+    flex-direction: column;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 250px) {
+  html {
+    font-size: 14px;
+  }
+
+  #current canvas, .current canvas {
+    width: 60px;
+    height: 60px;
+  }
+
+  .day {
+    margin: 0 5%;
+  }
+
+  .day canvas {
+    width: 40px;
+    height: 40px;
+  }
+
+  #current-temp {
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 600px) and (max-height: 380px) {
+  #current, .current {
+    display: none;
+  } 
+  .day p.day-name {
+    margin-right: -10px;
+  }
+
+  .day p.low-temp {
+    margin-top: 0;
+    margin-left: -15px;
+  } 
+}
+
+@media screen and (max-height: 300px) {
+  #current, .current {
+    display: none;
+  }
+  header {
+    font-size: .8em;
+  }
+}
+
+@media screen and (max-width: 600px) and (max-height: 300px) {
+  #current, .current {
+    display: none;
+  }
+  .day {
+    display: none;
+  }
+
+  .day:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0 1%;
+  }
+}
+
+@media (max-width: 695px) {
+  nav {
+    font-size: 15px;
+  }
+
+  nav a {
+    padding: 2%;
+  }
+}
+
+@media (max-width: 425px) {
+  nav a {
+    padding: 1%;
+  }
+
+  header h1 {
+    font-size: 2.2em;
+  }
+
+  header h2 {
+    font-size: 1.2em;
+  }
+
+  .questions-container {
+    width: 95%;
+  }
+
+  .answers h2, .help .question a {
+    font-size: 1.1em;
+  }
+
+  .answers a {
+    font-size: 1.0em;
+  }
+
+  .question .answer {
+    font-size: .9em;
+  }
+
+  #wufoo-z1tfajhs1y01cw1, #wufoo-rmdmcxh07e9wk8 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  nav > .inner {
+    width: 90%;
+  }
+  nav p {
+    padding: 10px 5px;
+  }
+
+  .day p.day-name {
+    margin-right: -10px;
+  }
+
+  .day p.low-temp {
+    margin-top: 0;
+    margin-left: -15px;
+  }
+
+}
+
+/* Mobile styles for nav */
+@media (max-width: 695px) {
+  nav {
+    font-size: 15px;
+  }
+  nav a {
+    padding: 2%;
+  }
+}
+
+@media (max-width: 500px) {
+
+  nav > .inner {
+    width: auto;
+  }
+  .low-temp {
+    margin-top: 0;
+  }
+  #footer #footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #footer #footer-links li {
+    margin: 15px 0;
+  }
+
+
+  #footer #footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #footer #footer-links li {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 335px) {
+  nav .inner a {
+    padding: 1%;
+  }
+}

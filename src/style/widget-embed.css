@@ -1,0 +1,304 @@
+/* Customization page styles */
+
+body {
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  background-color: #F1F1F1;
+  margin-bottom: 50px;
+  /*padding-bottom: 100px;*/
+}
+
+.header .section-header {
+  display: flex;
+  justify-content: flex-end;
+  color: #FFFFFF;
+  background-color: #333333;
+}
+
+.header .section-header p {
+  margin-right: 5%;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.header .section-header p a {
+  color: #ffffff;
+  text-decoration: underline;
+  font-size: 1em;
+}
+
+.header .section-header p a:hover {
+  text-decoration: none;
+}
+
+.main-container {
+  padding: 150px;
+  /*border-bottom: 1px solid grey;*/
+  /* background: url(../images/bg_2.jpg) no-repeat center center fixed; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+h1, h3 {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  /*margin: 0;*/
+  padding: 0; 
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 2em;
+}
+
+.embed-name {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+header {
+  visibility: visible;
+}
+
+header p a {
+  color: #333;
+}
+
+.dark-sky-widget {
+  margin: 0 auto;
+  /*margin: 150px 0;*/
+}
+
+hr {
+  margin: 75px 10%;
+}
+
+.dark-sky-widget .widget-container {
+  max-width: 500px;
+  /*min-height: 300px;*/
+  margin: 0 auto;
+}
+
+.selected {
+  background-color: #EEEEEE;
+}
+
+#customize-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#custom-tools {
+  display: flex;
+  flex-direction: column;
+}
+
+#custom-controls {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  margin: 0 auto;
+}
+
+#custom-map {
+  /*margin: 0 auto;*/
+  display: flex;
+  justify-content: center;
+}
+
+.content-container {
+  text-align: center;
+  margin: 25px 0;
+  display: none;
+}
+
+.content-container input {
+  box-sizing: content-box;
+  width: 75%;
+  height: 20px;
+  padding: 3px 3px;
+  border-radius: 3px;
+  border: 2px solid #C7C7C7;
+}
+
+.column p, form p {
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column p span input, form p span input:not(#submit) {
+  padding: 5px 3px;
+  border-radius: 3px;
+  border: 1px solid grey;
+}
+
+#gmaps p span input {
+  margin: 0 15px;
+}
+
+.column p:hover, form p:hover {
+  background-color: #EEE;
+}
+
+form p:nth-child(4):hover {
+  background-color: #FFFFFF;
+}
+
+.column p span:first-child {
+  margin-right: 5px;
+}
+
+.description {
+  margin: 0 auto;
+  width: 60%;
+}
+
+button, #submit {
+  /*transition: .3s;*/
+  background-color: #228FFF;
+  color: white;
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  border: 2px solid #1F8CFD;
+  border-radius: 3px;
+  padding: 3px 12px;
+  text-transform: uppercase
+}
+
+button:hover {
+  /*transition: .3s;*/
+  cursor: pointer;
+  font-weight: 400;
+  /*padding: 5px 15px;*/
+  /*font-size: 1.6em;*/
+}
+
+.show-hide-map {
+  margin: 0 auto;
+}
+
+#submit, .show-hide-map button {
+  transition: .3s;
+  font-size: 1em;
+}
+
+#submit:hover, .show-hide-map button:hover {
+  cursor: pointer;
+  font-weight: 400;
+  /*background-color: #0C4075;*/
+  /*font-size: 1em;*/
+  /*padding: 3px 12px;*/
+}
+
+.button-generate, .button-reset {
+  margin: 10px 0;
+  text-align: center;
+  height: 50px;
+}
+
+.reset {
+  display: none;
+}
+
+footer {
+  min-height: 175px;
+  width: 80%;
+  margin: 20px auto;
+  border: 25px solid grey;
+}
+
+footer p {
+  padding: 0 5px;
+}
+
+footer p code {
+  word-wrap: break-word;
+}
+
+#custom-tools, footer {
+  display: none;
+}
+
+/* Container settings */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  /*border-top: 2px solid #333333;*/
+  margin: 0 3px;
+  padding: 5px 0;
+}
+
+.current {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
+.current-temp {
+  margin: 0 5%;
+  font-size: 3.5em;
+  text-align: center;
+}
+
+.current-temp span {
+  display: block;
+  text-align: left;
+  font-size: .25em;
+}
+.current-temp span:nth-child(2) {
+  position: relative;
+  margin-top: -10px;
+}
+
+.current-temp span:last-child {
+  font-size: .2em;
+}
+
+.current canvas {
+  width: 80px;
+  height: 80px;
+}
+
+.current-summary {
+  font-size: 1em;
+}
+
+.current-summary p:first-child {
+  font-weight: bold;
+}
+
+.current-summary p:last-child {
+  font-size: .8em;
+  margin-top: -12px;
+}
+
+#map-canvas {
+  width: 350px;
+  height: 250px;
+}
+
+.widget-logo {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  top: 3px;
+  left: 2px;
+}

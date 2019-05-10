@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld :msg="hello"/>
+    <h1>{{hello}}</h1>
+    <Forecast></Forecast>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import gql from "graphql-tag";
+import Forecast from './components/Forecast';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Forecast
   },
   apollo:{
     hello: gql`

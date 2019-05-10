@@ -1,0 +1,150 @@
+/*
+Name: Dark Sky Embed main css
+Author: Erik Straight
+Date: 03/14/16
+*/
+
+/* Set overall properties to border box */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 100%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Default settings */
+body {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* Header settings */
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid #333333;
+    /*visibility: hidden;*/
+  }
+
+  header p {
+    margin-bottom: 7px;
+  }
+
+  header p:first-child {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-left: 15px;
+  }
+
+  header p:last-child {
+    font-size: .8em;
+    padding-right: 15px;
+  }
+
+  #loading {
+    font-size: 3em;
+  }
+
+  /* Container settings */
+  #container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 3px;
+    padding: 5px 0;
+  }
+
+  #current {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  #current-temp {
+    margin: 0 5%;
+    font-size: 3.5em;
+  }
+
+  #current-temp span {
+    display: block;
+    text-align: left;
+    font-size: .25em;
+  }
+
+  #current-temp span:first-child {
+    margin-top: -12px;
+  }
+
+  #current-temp span:last-child {
+    font-size: .20em;
+    margin-top: 5px;
+  }
+
+  #current canvas {
+    width: 80px;
+    height: 80px;
+  }
+
+  #current-summary {
+    font-size: 1em;
+  }
+
+  #current-summary p:first-child {
+    font-weight: bold;
+  }
+
+  #current-summary p:last-child {
+    font-size: .8em;
+    margin-top: -12px;
+  }
+
+  #daily {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+  }
+
+  .day {
+    padding: 5px 15px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .day-name {
+    font-weight: bold;
+    font-size: .5em;
+  }
+
+  .day canvas {
+    width: 26px;
+    height: 26px;
+  }
+
+
+  .day p {
+    margin: 0;
+  }
+
+  .day p:last-child {
+    margin-top: -3px; 
+  }
