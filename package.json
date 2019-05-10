@@ -1,6 +1,13 @@
 {
   "name": "vue2-weather",
   "version": "0.1.0",
+  "description": "Weather App with DarkSky GraphQL API",
+  "author": "Berkan Sivri <berkansivri@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/berkansivri/Vue2-Weather.git"
+  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,6 +18,7 @@
     "apollo-boost": "^0.3.1",
     "core-js": "^2.6.5",
     "graphql": "^14.3.0",
+    "moment": "^2.24.0",
     "postscribe": "^2.0.8",
     "skycons": "^1.0.0",
     "vue": "^2.6.10",

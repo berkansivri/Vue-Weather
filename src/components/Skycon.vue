@@ -32,8 +32,7 @@ export default {
     this.init();
   },
   methods: {
-    init() {
-      // initialize skycons
+    init() { 
       this.destroy();
       this.skycons = new Skycons({
         color: this.color

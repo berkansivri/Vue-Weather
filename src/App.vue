@@ -8,11 +8,11 @@
 <script>
 import gql from "graphql-tag";
 import Forecast from './components/Forecast';
-
+import Map from './components/Map'
 export default {
   name: 'app',
   components: {
-    Forecast
+    Forecast,
   },
   apollo:{
     hello: gql`
@@ -32,5 +32,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: #fcfcfc;
 }
 </style>
