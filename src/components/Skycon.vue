@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Skycons from "skycons";
+import Skycons from "../assets/skycons.js";
 export default {
   props: {
     width: {
