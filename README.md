@@ -8,11 +8,11 @@
   <p align="center">
     This project is vue implementation on <a href="https://darksky.net" target="_blank">DarkSky</a> maps and default weather embed with getting data from Apollo-GraphQL server with <a href="https://github.com/Akryum/vue-apollo" target="_blank">Vue-Apollo</a>.
     <br />
-    <h2 align="center"><strong><a target="_blank" href="https://darksky-graphql.berkansivri.now.sh">Live Demo</a></strong></h2>
+    <h2 align="center"><strong><a target="_blank" href="https://vue2-weather.berkansivri.now.sh/">Live Demo</a></strong></h2>
   </p>
   <br/>
   <p align="center">
-    <a href="https://github.com/berkansivri/DarkSky-GraphQL" target="_blank">Click for Apollo GraphQL API Repo</a>
+    <a href="https://github.com/berkansivri/DarkSky-GraphQL/" target="_blank">Click for Apollo GraphQL API Repo</a>
   </p>
 </p>
 
