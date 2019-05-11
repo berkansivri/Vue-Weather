@@ -1,12 +1,13 @@
 <template>
   <div class="dark-sky-widget default-embed" data-name="default" v-if="Object.keys(this.currently).length > 0">
+    <Search @geoLocationChange="geoChange"></Search>
     <div id="currentDetailsWrapper">
       <div id="currentDetails">
         <div class="wind">
           <span class="label swip">Wind:</span>
           <span class="val swap">
-            <span class="num swip">{{currently.windSpeed}} </span>
-            <span class="unit swap">m/s</span>
+            <span class="num swip">{{currently.windSpeed}}</span>
+            <span class="unit swap"> km/s</span>
             <span class="direction" title="NNE" style="display:inline-block;-ms-transform:rotate(16deg);-webkit-transform:rotate(16deg);transform:rotate(16deg);">↑</span>
           </span>
         </div>
@@ -44,6 +45,9 @@
         </div>
       </div>
     </div>
+    <div class="toggle">
+      <p style="font-size:11px;margin:0 0 3px 0;">Icons</p> <ToggleButton v-model="iconSet" :sync="true" :color="{checked: 'grey', unchecked: 'grey'}" :width="70" :labels="{checked: 'Skycon', unchecked: 'Darksky'}"></ToggleButton>
+    </div>
     <div class="widget-container">
       <header style="color: rgb(51, 51, 51); border-bottom: 2px solid rgb(51, 51, 51);">
         <p id="location" style="color: rgb(51, 51, 51);">Full Forecast</p>
@@ -55,25 +59,26 @@
       </header>
       <div class="container">
         <div class="current" v-if="Object.keys(currently).length > 0">
-          <skycon :condition="currently.icon"></skycon>
+          <skycon :condition="currently.icon" :icon="iconSet"></skycon>
           <div class="current-temp" style="color: rgb(51, 51, 51);">
-            <strong>{{currently.temperature}}</strong>
+            <strong>{{currently.temperature}}</strong> <small style="font-size:20px;display:inline-block;vertical-align:top;padding-top:7px;">&deg;C</small>
             <span>and holding</span>
-            <span>Wind: {{currently.windSpeed}}</span>
+            <span>Wind: {{currently.windSpeed}} km/s</span>
           </div>
           <div id="current-summary" style="color: rgb(51, 51, 51);">
             <p>{{currently.summary}}</p>
-            <p>
-              TODO
+            <p style="font-size:11px">
+              Coordinates: {{latitude.toFixed(3)}}, {{longitude.toFixed(3)}}<br/>
+              Timezone: {{timezone}}
             </p>
           </div>
         </div>
         <div id="daily">
-          <div class="day" v-for="day in daily">
+          <div class="day" v-for="(day,i) in daily" :key="i">
             <p class="day-name" style="color: rgb(51, 51, 51);">
               {{day.time.format('dddd')}}
             </p>
-            <skycon width="35" height="35" :condition="day.icon"></skycon>
+            <skycon :width="35" :height="35" :condition="day.icon" :icon="iconSet"></skycon>
             <p class="high-temp" style="color: rgb(51, 51, 51);">{{day.temperatureHigh}}</p>
             <p class="low-temp" style="color: rgb(199, 199, 199);">{{day.temperatureLow}}</p>
           </div>
@@ -86,7 +91,7 @@
 <script>
 import gql from "graphql-tag";
 import moment from "moment";
-
+import Search from './Search' 
 export default {
   props: {
     latitude:{
@@ -96,17 +101,22 @@ export default {
       default: "28.977"
     }
   },
+  components:{
+    Search, 
+  },
   data() {
     return {
       currently: {},
-      daily: {}
+      daily: {},
+      timezone: "",
+      iconSet: true
     };
   },
   mounted() {
-    this.getForecast();
+    this.getForecast(this.latitude, this.longitude);
   },
   methods: {
-    async getForecast() { 
+    async getForecast(lat, long) { 
       var response = await this.$apollo.query({
         query: gql`
           query($latitude: Float!, $longitude: Float!) {
@@ -138,11 +148,11 @@ export default {
           }
         `,
         variables: {
-          latitude: this.latitude,
-          longitude: this.longitude
+          latitude: lat,
+          longitude: long
         }
       });
-
+      this.timezone = response.data.forecast.timezone;
       this.currently = response.data.forecast.currently;
       this.currently.temperature = Math.trunc(this.currently.temperature);
 
@@ -153,6 +163,9 @@ export default {
       });
 
       this.daily = response.data.forecast.daily.data;
+    },
+    geoChange({lat,long}){ 
+      this.getForecast(lat,long);
     }
   }
 };
@@ -163,4 +176,10 @@ export default {
 @import "../style/widget-default.css";
 @import "../style/widget-embed.css";
 @import "../style/responsive-widget.css";
+
+.toggle {
+  float:right;
+  margin: 5px 5px 0 0;
+}
+
 </style>
