@@ -1,6 +1,6 @@
 <template>
   <div class="dark-sky-widget default-embed" data-name="default" v-if="Object.keys(this.currently).length > 0">
-    <Search @geoLocationChange="geoChange"></Search>
+    <Search></Search>
     <div id="currentDetailsWrapper">
       <div id="currentDetails">
         <div class="wind">
@@ -112,11 +112,19 @@ export default {
       iconSet: true
     };
   },
+  watch:{
+    $props:{
+      handler(){
+        this.getForecast();
+      },
+      deep: true, 
+    }
+  },
   mounted() {
-    this.getForecast(this.latitude, this.longitude);
+    this.getForecast();
   },
   methods: {
-    async getForecast(lat, long) { 
+    async getForecast() { 
       var response = await this.$apollo.query({
         query: gql`
           query($latitude: Float!, $longitude: Float!) {
@@ -148,8 +156,8 @@ export default {
           }
         `,
         variables: {
-          latitude: lat,
-          longitude: long
+          latitude: this.latitude,
+          longitude: this.longitude
         }
       });
       this.timezone = response.data.forecast.timezone;
@@ -163,10 +171,7 @@ export default {
       });
 
       this.daily = response.data.forecast.daily.data;
-    },
-    geoChange({lat,long}){ 
-      this.getForecast(lat,long);
-    }
+    }, 
   }
 };
 </script>

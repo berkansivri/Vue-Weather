@@ -45,6 +45,10 @@ export default {
         }
       );
     }
+    this.$eventBus.$on("geoLocationChange", ({lat,long}) => {
+      this.latitude = lat;
+      this.longitude = long;
+    })
   },
 }
 </script>

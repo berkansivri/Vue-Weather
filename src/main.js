@@ -21,6 +21,7 @@ const apolloProvider = new VueApollo({
 })
 
 Vue.component("skycon", Skycon)
+Vue.prototype.$eventBus = new Vue();
 
 new Vue({
   apolloProvider,

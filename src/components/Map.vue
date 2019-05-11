@@ -20,10 +20,19 @@ export default {
   },
   methods: {
     drawMap() {
+      document.getElementById("map").innerHTML = ""
       postscribe(
         "#map",
         `<script src="https://darksky.net/map-embed/@temperature,${this.latitude},${this.longitude},4.js?embed=true&timeControl=false&fieldControl=false&defaultField=temperature&defaultUnits=_c"><\/script>`
       );
+    }
+  },
+  watch:{
+    $props:{
+      handler(){
+        this.drawMap();
+      },
+      deep: true, 
     }
   }
 };

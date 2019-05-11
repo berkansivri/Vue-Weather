@@ -23,7 +23,7 @@ export default {
       let place = this.autocomplete.getPlace();
 			let lat = place.geometry.location.lat();
 			let long = place.geometry.location.lng();
-			this.$emit("geoLocationChange", {lat,long});
+			this.$eventBus.$emit("geoLocationChange", {lat,long});
     }
   }
 };
