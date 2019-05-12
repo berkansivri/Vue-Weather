@@ -6,9 +6,8 @@
         <div class="wind">
           <span class="label swip">Wind:</span>
           <span class="val swap">
-            <span class="num swip">{{currently.windSpeed}}</span>
-            <span class="unit swap"> km/s</span>
-            <span class="direction" title="NNE" style="display:inline-block;-ms-transform:rotate(16deg);-webkit-transform:rotate(16deg);transform:rotate(16deg);">↑</span>
+            <span class="num swip">{{currently.windSpeed.toFixed(2)}}</span>
+            <span class="unit swap"> {{unit ? "km/s" : "mph"}}</span>
           </span>
         </div>
         <div class="humidity">
@@ -32,8 +31,8 @@
         <div class="visibility">
           <span class="label swip">Visibility:</span>
           <span class="val swap">
-            <span class="num swip">{{currently.visibility}} </span>
-            <span class="unit swap">km</span>
+            <span class="num swip">{{currently.visibility.toFixed(2) }}</span>
+            <span class="unit swap"> {{unit ? "km/s" : "mph"}}</span>
           </span>
         </div>
         <div class="pressure">
@@ -46,7 +45,11 @@
       </div>
     </div>
     <div class="toggle">
-      <p style="font-size:11px;margin:0 0 3px 0;">Icons</p> <ToggleButton v-model="iconSet" :sync="true" :color="{checked: 'grey', unchecked: 'grey'}" :width="70" :labels="{checked: 'Skycon', unchecked: 'Darksky'}"></ToggleButton>
+      <p style="font-size:11px;margin:0 0 3px 0;">Icons</p> 
+      <ToggleButton v-model="iconSet" :sync="true" :color="{checked: 'grey', unchecked: 'grey'}" :width="70" :labels="{checked: 'Skycon', unchecked: 'Darksky'}"></ToggleButton>
+      <br>
+      <p style="font-size:11px;margin:5px 0 3px 0;">Units</p> 
+      <ToggleButton v-model="unit" :sync="true" :color="{checked: 'grey', unchecked: 'grey'}" :width="70" :labels="{checked: 'C', unchecked: 'F'}"></ToggleButton>
     </div>
     <div class="widget-container">
       <header style="color: rgb(51, 51, 51); border-bottom: 2px solid rgb(51, 51, 51);">
@@ -61,9 +64,10 @@
         <div class="current" v-if="Object.keys(currently).length > 0">
           <skycon :condition="currently.icon" :icon="iconSet"></skycon>
           <div class="current-temp" style="color: rgb(51, 51, 51);">
-            <strong>{{currently.temperature}}</strong> <small style="font-size:20px;display:inline-block;vertical-align:top;padding-top:7px;">&deg;C</small>
+            <strong>{{currently.temperature.toFixed(0)}}</strong> 
+            <small style="font-size:20px;display:inline-block;vertical-align:top;padding-top:7px;">&deg;{{unit ? "C" : "F"}}</small>
             <span>and holding</span>
-            <span>Wind: {{currently.windSpeed}} km/s</span>
+            <span>Wind: {{`${currently.windSpeed.toFixed(2)} ${unit ? "km/s" : "mph"}`}}</span>
           </div>
           <div id="current-summary" style="color: rgb(51, 51, 51);">
             <p>{{currently.summary}}</p>
@@ -79,8 +83,8 @@
               {{day.time.format('dddd')}}
             </p>
             <skycon :width="35" :height="35" :condition="day.icon" :icon="iconSet"></skycon>
-            <p class="high-temp" style="color: rgb(51, 51, 51);">{{day.temperatureHigh}}</p>
-            <p class="low-temp" style="color: rgb(199, 199, 199);">{{day.temperatureLow}}</p>
+            <p class="high-temp" style="color: rgb(51, 51, 51);">{{day.temperatureHigh.toFixed(0)}}</p>
+            <p class="low-temp" style="color: rgb(199, 199, 199);">{{day.temperatureLow.toFixed(0)}}</p>
           </div>
         </div>
       </div>
@@ -95,9 +99,13 @@ import Search from './Search'
 export default {
   props: {
     latitude:{
+      type: Number,
+      required: true,
       default: "41.0053"
     },
     longitude:{
+      type: Number,
+      required: true,
       default: "28.977"
     }
   },
@@ -109,7 +117,8 @@ export default {
       currently: {},
       daily: {},
       timezone: "",
-      iconSet: true
+      iconSet: false,
+      unit: true
     };
   },
   watch:{
@@ -118,6 +127,21 @@ export default {
         this.getForecast();
       },
       deep: true, 
+    },
+    unit(val){
+      if(!val){
+        this.currently.temperature = this.currently.temperature * 1.8 + 32;
+        this.daily.map (x => x.temperatureHigh = x.temperatureHigh * 1.8 + 32);
+        this.daily.map (x => x.temperatureLow = x.temperatureLow * 1.8 + 32);
+        this.currently.windSpeed = this.currently.windSpeed * 0.62137;
+        this.currently.visibility = this.currently.visibility * 0.62137;
+      }else{
+        this.currently.temperature = (this.currently.temperature - 32) / 1.8;
+        this.daily.map (x => x.temperatureHigh = (x.temperatureHigh - 32) / 1.8);
+        this.daily.map (x => x.temperatureLow = (x.temperatureLow - 32) / 1.8);
+        this.currently.windSpeed = this.currently.windSpeed / 0.62137;
+        this.currently.visibility = this.currently.visibility / 0.62137;
+      }
     }
   },
   mounted() {
@@ -125,10 +149,11 @@ export default {
   },
   methods: {
     async getForecast() { 
+      var unitParam = this.unit ? "ca" : "us"; 
       var response = await this.$apollo.query({
         query: gql`
-          query($latitude: Float!, $longitude: Float!) {
-            forecast(latitude: $latitude, longitude: $longitude) {
+          query($latitude: Float!, $longitude: Float!, $units: String) {
+            forecast(latitude: $latitude, longitude: $longitude, units: $units) {
               timezone
               latitude
               longitude
@@ -157,7 +182,8 @@ export default {
         `,
         variables: {
           latitude: this.latitude,
-          longitude: this.longitude
+          longitude: this.longitude,
+          units: unitParam
         }
       });
       this.timezone = response.data.forecast.timezone;
@@ -171,6 +197,7 @@ export default {
       });
 
       this.daily = response.data.forecast.daily.data;
+      response = null;
     }, 
   }
 };
