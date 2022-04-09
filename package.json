@@ -20,7 +20,7 @@
     "apollo-boost": "^0.3.1",
     "core-js": "^2.6.5",
     "graphql": "^14.3.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "postscribe": "^2.0.8",
     "vue": "^2.6.10",
     "vue-apollo": "^3.0.0-beta.29",
